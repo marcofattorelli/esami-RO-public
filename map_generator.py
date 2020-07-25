@@ -31,7 +31,7 @@ def generate(data):
         for task in exercise["tasks"]:
 
             task_values = ""
-            for i in range(1, task["tot_points"] + 1):
+            for i in range(0, task["tot_points"] + 1):
                 task_values += '<option value="'+str(i)+'">'+str(i)+'</option>\n'
 
             tasks_html += task_template.format(
