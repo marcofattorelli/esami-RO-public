@@ -185,7 +185,7 @@ def insert_rendition(note, note_name):
     note['cells'] += [nb.v4.new_code_cell(button_rend.replace('?FILENAME?', note_name))]
     note.cells[-1].metadata = {"init_cell": True, "tags": ['run_start'], "editable": False, "deletable": False, "tags": ['run_start']}
     return
-        
+	
 def create_exercise(exam_date, num, path_ex_folder, path_yaml):
     """It creates the new folder with 'free mode' ('modo_libero')
     Parameters:
@@ -215,14 +215,20 @@ def create_exercise(exam_date, num, path_ex_folder, path_yaml):
 
     if int(num) >= 10: # writing the notebook and saving it in the correct folder
         note_name = 'Esercizio_' + num + '.ipynb'
+        prev_folder = 'esercizio_' + num
     else:
         note_name = 'Esercizio_0' + num + '.ipynb'
+        prev_folder = 'esercizio_0' + num
     insert_rendition(notebook, note_name)
     nb.write(notebook, note_name)
     os.rename(os.getcwd()+ '/' + note_name, path_mode_free + '/' + note_name)
     os.system("jupyter trust " + path_mode_free + note_name) # signing the notebook in order to make it trusted
     insert_suppl_folders(path_mode_free) # inserting the supplementary folders (i.e., 'allegati', 'img')
-    return exer['title']
+    if 'tags' in exer:
+        e_dict = {'title':exer['title'],'tags':exer['tags'],'tot_points':0,'link':'http://127.0.0.1:8888/notebooks/'+prev_folder+'/modo_libero/' + note_name, 'tasks':exer['tasks']}
+    else:
+	    e_dict = {'title':exer['title'],'tags':[],'tot_points':0,'link':'http://127.0.0.1:8888/notebooks/'+prev_folder+'/modo_libero/' + note_name, 'tasks':exer['tasks']}
+    return e_dict
 
 if __name__ == "__main__":
     parser=argparse.ArgumentParser(
