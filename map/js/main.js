@@ -175,11 +175,11 @@ function exportMap()
             
             var task_panel = taskAccordion.nextElementSibling;
             var task_notes = task_panel.querySelector(".notes").value
-            out_tasks = {
+            out_tasks.push({
                 "score" : task_score,
                 "score_max" : task_max_score,
                 "notes" : task_notes
-            }
+            });
             //console.log("    score:" + task_score+"/"+task_max_score, task_notes)
         })
 
