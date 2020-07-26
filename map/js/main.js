@@ -1,3 +1,4 @@
+
 var num_modes;
 var all_scores=[];
 var current_modes=[];
@@ -196,11 +197,28 @@ function exportMap()
         })
     })
 
-    var out_string = JSON.stringify(out_exercises, null, 2);
-    console.log(out_string);
-    download(out_string,"mappa_esportata.yaml", "text/plain;charset=utf-8");
-    alert("Mappa esportata!")
 
+    var out_string = JSON.stringify(out_exercises, null, 2);
+    console.log(out_string, encodeURI(out_string));
+    saveMapWithServer(out_string);
+
+}
+
+function saveMapWithServer(content) {
+    var client = new XMLHttpRequest();
+    client.open("GET", "http://127.0.0.1:8080/server_command_?type=save&data=" + encodeURI(content), true);
+    client.send();
+    client.onreadystatechange = function() {
+        if(this.readyState == this.HEADERS_RECEIVED) {
+            //basic download in case of error
+            if(client.statusText != "done"){
+                download(out_string,"mappa_esportata.yaml", "text/plain;charset=utf-8");
+                alert("Mappa scaricata, ricordati di inviarla insieme all'esame")
+            }
+            else
+                alert("Mappa esportata!")
+        }
+    }
 }
 
 function download(content, fileName, contentType) {

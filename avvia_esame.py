@@ -32,7 +32,7 @@ else:
 
 
 # start local http server
-command = sys.executable + " -m http.server " + webserverPort + " --bind " + webserverIp
+command = sys.executable + " map/server.py " + webserverPort + " --bind " + webserverIp 
 print("> " + command)
 p1 = subprocess.Popen(command, shell=True)
 webbrowser.open("http://" + webserverIp + ":" + webserverPort + "/map/index.html?port="+jupyterPort)
