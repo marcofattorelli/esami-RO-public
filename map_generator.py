@@ -24,16 +24,17 @@ def generate(data):
         for tag in exercise["tags"]: 
             ex_tags += '<div class="competence">' + tag + '</div> '
         
-        tot_points = exercise["tot_points"]
+        #tot_points = exercise["tot_points"]
 
         tasks_html = ""
         task_idx = 1
+        total_points_calculated = 0
         for task in exercise["tasks"]:
 
             task_values = ""
             for i in range(0, task["tot_points"] + 1):
                 task_values += '<option value="'+str(i)+'">'+str(i)+'</option>\n'
-
+            total_points_calculated += task["tot_points"] 
             tasks_html += task_template.format(
                 ex_task_name = "Task " + html.escape(str(task_idx)),
                 ex_task_values = task_values,
@@ -41,11 +42,11 @@ def generate(data):
                 ex_task_description = html.escape(task["description1"])
             ) + "\n"
             task_idx += 1
-        
+            
         outHTML += exercise_template.format(
             ex_title = html.escape(exercise["title"]),
             ex_tags = ex_tags,
-            ex_tot_points = tot_points,
+            ex_tot_points = total_points_calculated,
             ex_link = exercise["link"],
             ex_tasks = tasks_html
         )
