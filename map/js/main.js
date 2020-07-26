@@ -1,3 +1,7 @@
+/*!
+@authors: Adriano Tumminelli, Marco Emporio, Rosario Di Matteo
+*/
+
 
 var num_modes;
 var all_scores=[];

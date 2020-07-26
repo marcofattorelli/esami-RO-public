@@ -1,4 +1,7 @@
-
+# -*- coding: utf-8 -*-
+"""
+@authors: Adriano Tumminelli
+"""
 
 map_save_path = "map_export.txt"
 

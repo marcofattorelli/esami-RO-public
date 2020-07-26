@@ -1,3 +1,9 @@
+
+# -*- coding: utf-8 -*-
+"""
+@authors: Adriano Tumminelli
+"""
+
 import html
 
 def generate(data):
