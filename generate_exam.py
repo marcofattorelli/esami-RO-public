@@ -11,6 +11,8 @@ import argparse
 import create_exercise_free as mode1
 import create_exercise_verifier as mode2
 import create_exercise_applet as mode3
+import map_generator
+from distutils.dir_util import copy_tree
 import csv
 import errno
 import hashlib
@@ -106,11 +108,11 @@ def add_map(date, badge_nb, info_map, name, surname): ############to_do
     name (str): students''s name
     surname (str): students''s surname"""
     
-    global path_student
-    shutil.copy('./avvia_esame.py', path_student) #to do: activate conda env in avvia_esame.py 
+    global absolute_path_student
+    shutil.copy('./avvia_esame.py', absolute_path_student) #to do: activate conda env in avvia_esame.py 
     to_render = map_generator.generate(info_map)
-    copy_tree('./map',path_student+'/map')
-    f = open(path_student + '/map/' + 'index.html','w')
+    copy_tree('./map',absolute_path_student+'/map')
+    f = open(absolute_path_student + '/map/' + 'index.html','w')
     f.write(to_render)
     f.close()
 
